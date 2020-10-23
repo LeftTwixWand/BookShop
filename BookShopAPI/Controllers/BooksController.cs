@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookShopAPI.Data;
 using BookShopAPI.Models;
+using System;
+using BookShopAPI.Filters;
 
 namespace BookShopAPI.Controllers
 {
@@ -35,6 +37,50 @@ namespace BookShopAPI.Controllers
             }
 
             return book;
+        }
+
+        // GET: api/Books/filter
+        [HttpGet("filter")]
+        public async Task<ActionResult<IEnumerable<Book>>> GetFilteredBooks([FromQuery] BookFilter bookFilter)
+        {
+            var queryable = _context.Books.AsQueryable();
+
+            if (bookFilter.Id > 0)
+            {
+                queryable = queryable.Where(book => book.Id == bookFilter.Id);
+            }
+
+            if (!String.IsNullOrEmpty(bookFilter.Author))
+            {
+                queryable = queryable.Where(book => book.Author == bookFilter.Author);
+            }
+
+            if (!String.IsNullOrEmpty(bookFilter.Title))
+            {
+                queryable = queryable.Where(book => book.Title == bookFilter.Title);
+            }
+
+            if (bookFilter.Publication != null)
+            {
+                queryable = queryable.Where(book => book.Publication == bookFilter.Publication);
+            }
+
+            if (bookFilter.Cover != Cover.All)
+            {
+                queryable = queryable.Where(book => book.Cover == bookFilter.Cover);
+            }
+
+            if (bookFilter.AgeCategory != AgeCategory.All)
+            {
+                queryable = queryable.Where(book => book.AgeCategory == bookFilter.AgeCategory);
+            }
+
+            if (bookFilter.Genre != Genre.All)
+            {
+                queryable = queryable.Where(book => book.Genre == bookFilter.Genre);
+            }
+
+            return await queryable.ToListAsync();
         }
 
         // PUT: api/Books/5
@@ -69,7 +115,7 @@ namespace BookShopAPI.Controllers
 
         // POST: api/Books
         [HttpPost]
-        public async Task<ActionResult<Book>> PostBook([FromBody]Book book)
+        public async Task<ActionResult<Book>> PostBook([FromBody] Book book)
         {
             _context.Books.Add(book);
             await _context.SaveChangesAsync();

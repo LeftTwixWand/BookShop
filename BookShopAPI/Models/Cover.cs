@@ -6,6 +6,7 @@
     /// </summary>
     public enum Cover : byte
     {
+        All,
         HardCover,
         SoftCover,
         HandBound,

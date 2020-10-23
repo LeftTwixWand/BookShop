@@ -5,6 +5,7 @@
     /// </summary>
     public enum Genre : byte
     {
+        All,
         Detective,
         Sciense,
         Novel,
