@@ -2,7 +2,7 @@
 
 
 
-### Выйти со мной на связь:
+### Contact me:
 <a href="https://www.linkedin.com/in/vladyslav-horbachov/?locale=en_US/">
   <img align="left" alt="Ajay's Linkdein" width="35px" height="35px" src="https://img.icons8.com/fluent/96/000000/linkedin.png" />
 </a>
@@ -12,6 +12,6 @@
 <br />
 <img align="right" alt="GIF" width="350" height="350" src="https://media.giphy.com/media/LmNwrBhejkK9EFP504/giphy.gif" />
 
-### BookShop
-- Максимально простое API
-- Реализация: .NET 5, SQLite, EF Core, встроенный Swagger
+### BookShop is:
+- The easyest REST API
+- Realisation: .NET 5, SQLite, EF Core, built-in Swagger
